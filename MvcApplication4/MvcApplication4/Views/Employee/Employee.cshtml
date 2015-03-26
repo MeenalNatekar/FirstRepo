@@ -1,0 +1,107 @@
+﻿
+@model MvcApplication4.Models.Employee
+@{
+    ViewBag.Title = "Employee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="@Url.Content("~/Scripts/jquery-ui-1.8.24.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")"></script>
+<script type="text/javascript">
+ (function ($) {
+     $fn.resetValidation = function () {
+         var $form = this.closest('tabledisplay');
+         //reset jQuery Validate's internals
+         $form.validate().resetForm();
+         //reset unobtrusive validation summary, if it exists
+         $form.find("[data-valmsg-summary=true]")
+             .removeClass("validation-summary-errors")
+             .addClass("validation-summary-valid")
+             .find("ul").empty();
+         //reset unobtrusive field level, if it exists
+         $form.find("[data-valmsg-replace]")
+             .removeClass("field-validation-error")
+             .addClass("field-validation-valid")
+             .empty();
+         return $form;
+     };
+ });
+</script>
+<h2>@MvcApplication4.App_GlobalResources.Resource1.Greetings</h2>
+
+@*<div>
+    <fieldset>
+        <legend>Employee Details</legend>
+        <table>
+            <tr>
+                <td>
+                    First Name
+                </td>
+                <td>@Model.FirstName</td>
+           </tr>
+            <tr>
+                <td>
+                    Last Name
+                </td>
+                <td>@Model.LastName</td>
+            </tr>
+            <tr>
+                <td>
+                    Department
+                </td>
+                <td>@Model.Department</td>
+            </tr>
+            <tr>
+                <td>
+                    Designation
+                </td>
+                <td>@Model.Designation</td>
+            </tr>
+    </table>
+</fieldset>
+</div>*@
+<div>
+    @using (Html.BeginForm("Employee", "Employee", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        
+        <table id="tabledisplay">
+            <tr>
+                <td>
+                    First Name
+                </td>
+                <td>@Html.TextBoxFor(x => x.FirstName, new { Value = "" })</td>    
+                <td>@Html.ValidationMessageFor(x => x.FirstName)</td>                       
+            </tr>
+            <tr>
+                <td>
+                    Last Name
+                </td>
+                <td>@Html.TextBoxFor(x => x.LastName, new { Value = "" })</td>
+                <td>@Html.ValidationMessageFor(x=>x.LastName)</td>
+            </tr>
+            <tr>
+                <td>
+                    Department
+                </td>
+                <td>@Html.TextBoxFor(x => x.Department, new { Value = "" })</td>
+                <td>@Html.ValidationMessageFor(x=>x.Department)</td>
+            </tr>
+            <tr>
+                <td>
+                    Designation
+                </td>
+                <td>@Html.TextBoxFor(x => x.Designation, new { Value = "" })</td>
+                <td>@Html.ValidationMessageFor(x=>x.Designation)</td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" id="btnSubmit" name="btnSubmit" />
+                    <input type="button" id="btnReset" name="btnReset" value="Reset" onclick="$(this).resetValidation();" />
+                </td>
+            </tr>
+        </table>
+    }
+
+</div>

@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Calculate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Calculate</h2>
+
+<table>
+    @using (Html.BeginForm("Calculate", "Calculate", FormMethod.Post))
+    {
+        <tr>
+            <td>First Name</td>
+            <td></td>
+        </tr>
+         <tr>
+            <td>Last Name</td>
+            <td></td>
+        </tr>
+         <tr>
+            <td>Designation</td>
+            <td></td>
+        </tr>        
+    }                    
+</table>
